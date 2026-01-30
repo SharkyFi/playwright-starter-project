@@ -2,7 +2,6 @@
   "name": "playwright-starter-project",
   "version": "1.0.0",
   "description": "Playwright starter project with simple test examples",
-  "main": "index.js",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
