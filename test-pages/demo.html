@@ -99,10 +99,24 @@
             const message = document.getElementById('messageInput').value;
             
             const result = document.getElementById('result');
-            result.innerHTML = `<h3>Form Submitted!</h3>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Message:</strong> ${message}</p>`;
+            // Use textContent to prevent XSS vulnerabilities
+            result.innerHTML = '<h3>Form Submitted!</h3>';
+            
+            const nameP = document.createElement('p');
+            nameP.innerHTML = '<strong>Name:</strong> ';
+            nameP.appendChild(document.createTextNode(name));
+            
+            const emailP = document.createElement('p');
+            emailP.innerHTML = '<strong>Email:</strong> ';
+            emailP.appendChild(document.createTextNode(email));
+            
+            const messageP = document.createElement('p');
+            messageP.innerHTML = '<strong>Message:</strong> ';
+            messageP.appendChild(document.createTextNode(message));
+            
+            result.appendChild(nameP);
+            result.appendChild(emailP);
+            result.appendChild(messageP);
             result.style.display = 'block';
         });
     </script>

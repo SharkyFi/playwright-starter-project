@@ -47,9 +47,9 @@ This project includes several simple test examples:
 - Working with multiple elements
 
 ### 3. Form and Input Tests (`03-form-input.spec.js`)
-- Interacting with search inputs
 - Filling form fields
-- Using keyboard shortcuts
+- Submitting forms and verifying results
+- Clearing and refilling input fields
 
 ### 4. API Testing Examples (`04-api-testing.spec.js`)
 - Making GET requests

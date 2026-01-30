@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 // Skip API tests in environments without internet access
 test.describe('API Testing Examples', () => {
-  test.skip(({ }) => !process.env.RUN_API_TESTS, 'API tests require internet access');
+  test.skip(!process.env.RUN_API_TESTS, 'API tests require internet access');
 
   test('should make a GET request and verify response', async ({ request }) => {
     // Make a GET request to a public API

@@ -1,7 +1,7 @@
 {
   "name": "playwright-starter-project",
   "version": "1.0.0",
-  "description": "public starter project for devnet sol from faucet",
+  "description": "Playwright starter project with simple test examples",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",

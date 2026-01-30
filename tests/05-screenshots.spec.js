@@ -4,19 +4,19 @@ const path = require('path');
 const TEST_PAGE_URL = `file://${path.resolve(__dirname, '../test-pages/demo.html')}`;
 
 test.describe('Screenshot and Visual Tests', () => {
-  test('should take a screenshot of a page', async ({ page }) => {
+  test('should take a screenshot of a page', async ({ page }, testInfo) => {
     await page.goto(TEST_PAGE_URL);
     
-    // Take a screenshot
-    await page.screenshot({ path: 'test-results/homepage-screenshot.png' });
+    // Take a screenshot using testInfo for proper path handling
+    await page.screenshot({ path: testInfo.outputPath('homepage-screenshot.png') });
   });
 
-  test('should take a screenshot of a specific element', async ({ page }) => {
+  test('should take a screenshot of a specific element', async ({ page }, testInfo) => {
     await page.goto(TEST_PAGE_URL);
     
     // Take a screenshot of just the header
     const header = page.locator('h1');
-    await header.screenshot({ path: 'test-results/header-screenshot.png' });
+    await header.screenshot({ path: testInfo.outputPath('header-screenshot.png') });
   });
 
   test('should verify element state', async ({ page }) => {
@@ -31,9 +31,10 @@ test.describe('Screenshot and Visual Tests', () => {
   test('should verify element attributes', async ({ page }) => {
     await page.goto(TEST_PAGE_URL);
     
-    // Check element attributes
-    await expect(page.locator('#clickButton')).toHaveAttribute('id', 'clickButton');
+    // Check meaningful element attributes
     await expect(page.locator('#nameInput')).toHaveAttribute('type', 'text');
+    await expect(page.locator('#nameInput')).toHaveAttribute('placeholder', 'Enter your name');
     await expect(page.locator('#emailInput')).toHaveAttribute('type', 'email');
+    await expect(page.locator('#emailInput')).toHaveAttribute('placeholder', 'Enter your email');
   });
 });
