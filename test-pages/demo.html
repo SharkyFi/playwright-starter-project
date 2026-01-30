@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright Test Demo Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 { color: #333; }
+        .container { margin: 20px 0; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            display: none;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Playwright Test Demo Page</h1>
+    <p>This is a simple test page for demonstrating Playwright capabilities.</p>
+
+    <div class="container">
+        <h2>Buttons</h2>
+        <button id="clickButton">Click Me</button>
+        <button id="toggleButton">Toggle Content</button>
+        <div id="toggleContent" class="hidden">
+            <p>This content can be toggled!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Form Example</h2>
+        <form id="testForm">
+            <label for="nameInput">Name:</label>
+            <input type="text" id="nameInput" placeholder="Enter your name" />
+            
+            <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" placeholder="Enter your email" />
+            
+            <label for="messageInput">Message:</label>
+            <textarea id="messageInput" rows="4" placeholder="Enter a message"></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>Links</h2>
+        <a href="#section1" id="link1">Link to Section 1</a> |
+        <a href="#section2" id="link2">Link to Section 2</a>
+    </div>
+
+    <div class="container">
+        <h2 id="section1">Section 1</h2>
+        <p>This is the first section.</p>
+    </div>
+
+    <div class="container">
+        <h2 id="section2">Section 2</h2>
+        <p>This is the second section.</p>
+    </div>
+
+    <script>
+        // Button click handler
+        document.getElementById('clickButton').addEventListener('click', function() {
+            alert('Button clicked!');
+        });
+
+        // Toggle button handler
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            const content = document.getElementById('toggleContent');
+            content.classList.toggle('hidden');
+        });
+
+        // Form submission handler
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const message = document.getElementById('messageInput').value;
+            
+            const result = document.getElementById('result');
+            // Use textContent to prevent XSS vulnerabilities
+            result.innerHTML = '<h3>Form Submitted!</h3>';
+            
+            const nameP = document.createElement('p');
+            nameP.innerHTML = '<strong>Name:</strong> ';
+            nameP.appendChild(document.createTextNode(name));
+            
+            const emailP = document.createElement('p');
+            emailP.innerHTML = '<strong>Email:</strong> ';
+            emailP.appendChild(document.createTextNode(email));
+            
+            const messageP = document.createElement('p');
+            messageP.innerHTML = '<strong>Message:</strong> ';
+            messageP.appendChild(document.createTextNode(message));
+            
+            result.appendChild(nameP);
+            result.appendChild(emailP);
+            result.appendChild(messageP);
+            result.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
