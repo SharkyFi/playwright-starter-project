@@ -1,7 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const path = require('path');
+const { pathToFileURL } = require('url');
 
-const TEST_PAGE_URL = `file://${path.resolve(__dirname, '../test-pages/demo.html')}`;
+const TEST_PAGE_URL = pathToFileURL(path.resolve(__dirname, '../test-pages/demo.html')).href;
 
 test.describe('Screenshot and Visual Tests', () => {
   test('should take a screenshot of a page', async ({ page }, testInfo) => {
